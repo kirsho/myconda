@@ -1,10 +1,10 @@
-Olivier Kirsh <olivier.kirsh@u-paris.fr>
-20199814
+Olivier Kirsh <olivier.kirsh@u-paris.fr>  
+20199814  
 
-This folder contains yml file for miniconda envs
-all have been updated on 20190814
-Cytoscape must not be updated. an alias start an env with the right jdk version and the app
-Last R is 3.6.1, but my env with my packages runs on r-3.5.1
+This folder contains yml files of miniconda envs.
+All have been updated on 20190814.  
+Cytoscape must not be updated. An alias start an env with the right jdk version and the app located in Apps/  
+Last R version is 3.6.1, but my env with my packages runs on r-3.5.1
 
 # conda environments:
 ```
@@ -15,10 +15,12 @@ cytoscape                /home/olivier/miniconda3/envs/cytoscape
 jpnb                     /home/olivier/miniconda3/envs/jpnb
 ngs                      /home/olivier/miniconda3/envs/ngs
 rst35ngs                 /home/olivier/miniconda3/envs/rst35ngs
+rst36                    /home/olivier/miniconda3/envs/rst36
 ufr                      /home/olivier/miniconda3/envs/ufr
 ```
 
-# Export
+# Export  
+
 ```
 conda env export -n ufr --no-build > ufr-20190814.yml
 conda env export -n rst36ngs --no-build > rst36ngs-20190814.yml
@@ -26,15 +28,33 @@ conda env export -n ngs --no-build > ngs-20190814.yml
 conda env export -n rst35ngs --no-build > rst35ngs-20190814.yml
 conda env export -n jpnb --no-build > jpnb-20190814.yml
 conda env export -n cytoscape --no-build > cytoscape-20190814.yml
+conda env export -n rst36 --no-build > rst36-20190814.yml
 ```
 
-# restore
+# restore  
+
 ```
 conda env create -n ufr -f ufr-20190814.yml 
 ```
 
-# Channels
-my channels, like at ifb core
+# Channels  
+
+my channels configurated like at ifb core for a better interoperability with singularity.  
+r channels is removed. It is needed to get the very last R version and rstudio, but conflicts with other packages can occur.  
+conda-forge > bioconda. It is counterintuitive, but seems to be more up to date and complete than bioconda.  
+R packages can easily be installe with conda ( -c r/bioconda/conda-forge), but for proper bioconductor installation prefere biocManager::install() inside R session. Clone **rst36** env at projects startup.  
+
+```
+conda env create --name myproject --clone rst36
+```
+
+or create one from rst36-20190814.yml
+
+```
+conda env create -n myproject -f rst36-20190814.yml
+```
+
+## Channel infos
 
 ```
 conda config --get channels
@@ -43,6 +63,13 @@ conda config --get channels
 --add channels 'bioconda'
 --add channels 'conda-forge'   # highest priority
 ```
+
+## Channel set up
+
+```
+conda config --add channels 'r'
+```
+the last will be the highest priority  
 
 # infos
 ```
