@@ -1,0 +1,7 @@
+name: jcytoscapcape
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+prefix: /home/olivier/miniconda3/envs/jcytoscapcape
+
